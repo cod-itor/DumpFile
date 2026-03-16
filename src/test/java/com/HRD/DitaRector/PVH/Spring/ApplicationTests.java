@@ -1,4 +1,4 @@
-package DitaRector;
+package com.HRD.DitaRector.PVH.Spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.HRD</groupId>
-    <artifactId>DitaRector</artifactId>
+    <artifactId>DITA-RECTOR-PVH-SPRING</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>05_DITA_RECTOR_PVH_SPRING_HOMEWORK002</name>
     <description>05_DITA_RECTOR_PVH_SPRING_HOMEWORK002</description>
