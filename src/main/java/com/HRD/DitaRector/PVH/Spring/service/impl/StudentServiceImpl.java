@@ -1,6 +1,7 @@
 package com.HRD.DitaRector.PVH.Spring.service.impl;
 
 import com.HRD.DitaRector.PVH.Spring.model.Entity.Student;
+import com.HRD.DitaRector.PVH.Spring.model.Request.StudentsRequest;
 import com.HRD.DitaRector.PVH.Spring.repository.StudentRepository;
 import com.HRD.DitaRector.PVH.Spring.service.StudentService;
 
@@ -24,4 +25,10 @@ public class StudentServiceImpl implements StudentService {
     public Student getStudentById(Long studentId){
         return studentRepository.getStudentById(studentId);
     }
- }
+
+    @Override
+    public Student createStudent(StudentsRequest studentsRequest) {
+
+        return studentRepository.createStudent(studentsRequest);
+    }
+}
