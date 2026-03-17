@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface InstructorService {
 
 List<Instructor> getAllInstructor(Integer page , Integer size);
