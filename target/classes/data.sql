@@ -9,3 +9,14 @@ INSERT INTO students (student_name, email, phone_number) VALUES
                                                              ('Jennifer Davis', 'jennifer.davis@gmail.com', '061667788'),
                                                              ('William Rodriguez', 'william.rodriguez@gmail.com', '017990011'),
                                                              ('Susan Martinez', 'susan.martinez@gmail.com', '070223344');
+INSERT INTO instructors (instructor_name, email) VALUES
+                                                     ('Alice Thompson', 'alice.t@university.edu'),
+                                                     ('Bob Richards', 'bob.richards@techprep.com'),
+                                                     ('Catherine Lee', 'c.lee@academy.org'),
+                                                     ('David Miller', 'david.m@studiopro.io'),
+                                                     ('Elena Rodriguez', 'elena.rod@learning.net'),
+                                                     ('Franklin Foster', 'f.foster@webdev.edu'),
+                                                     ('Gloria Chen', 'gloria.chen@codeschool.com'),
+                                                     ('Henry Wilson', 'h.wilson@it-training.org'),
+                                                     ('Isabella Kwok', 'isabella.k@dev-mastery.com'),
+                                                     ('Jameson Burke', 'j.burke@engineers.edu');

@@ -62,7 +62,6 @@ public class StudentController {
 
         }
     }
-
     @Operation(summary = "Create a new Student")
     @PostMapping
     public ResponseEntity<ApiResponse<Student>> createStudent(@RequestBody StudentsRequest studentsRequest){
