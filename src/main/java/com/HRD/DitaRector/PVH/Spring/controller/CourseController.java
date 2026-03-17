@@ -1,6 +1,12 @@
 package com.HRD.DitaRector.PVH.Spring.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping
 public class CourseController {
+    private
 
 
 }

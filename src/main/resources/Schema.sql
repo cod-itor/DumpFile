@@ -9,3 +9,8 @@ CREATE TABLE IF NOT EXISTS instructors (
                                            instructor_name VARCHAR(100) NOT NULL, -- Matches String instructorName
                                            email VARCHAR(100) NOT NULL UNIQUE   -- Matches String email
 );
+CREATE TABLE IF NOT EXISTS courses (
+                                       course_id SERIAL PRIMARY KEY,      -- Matches Long courseId
+                                       course_name VARCHAR(100) NOT NULL, -- Matches String courseName
+                                       description TEXT                   -- Matches String description
+);
