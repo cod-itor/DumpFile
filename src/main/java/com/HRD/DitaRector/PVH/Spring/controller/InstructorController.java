@@ -1,13 +1,17 @@
 package com.HRD.DitaRector.PVH.Spring.controller;
 
 import com.HRD.DitaRector.PVH.Spring.model.Entity.Instructor;
+import com.HRD.DitaRector.PVH.Spring.model.Entity.Student;
 import com.HRD.DitaRector.PVH.Spring.model.Request.InstructorRequest;
 import com.HRD.DitaRector.PVH.Spring.model.Response.ApiResponse;
 import com.HRD.DitaRector.PVH.Spring.service.InstructorService;
+import io.swagger.v3.core.util.OpenAPI30To31;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -21,13 +25,21 @@ public class InstructorController {
 
     @Operation(summary = "Get All instructors")
     @GetMapping
-    public ResponseEntity<List<Instructor>> getAllInstructor(@RequestParam Integer page , @RequestParam Integer size ){
-        return ResponseEntity.ok(instructorService.getAllInstructor(page, size));
+    public ResponseEntity< ApiResponse<List<Instructor>>> getAllInstructor(@RequestParam Integer page , @RequestParam Integer size ){
+        List<Instructor> getAllInstructor = instructorService.getAllInstructor(page, size);
+        ApiResponse<List<Instructor>> response = ApiResponse.<List<Instructor>>builder()
+                .success(true)
+                .status(HttpStatus.OK)
+                .messages("Instructor fetched successfully")
+                .payload(getAllInstructor)
+                .timestamp(Instant.now())
+                .build();
+        return ResponseEntity.ok(response);
 
     }
     @Operation(summary = "Get instructor by ID")
     @GetMapping("{instructor-id}")
-    public ResponseEntity<Instructor> getInstructorById(@PathVariable("instructor-id") Long instructorId){
+    public ResponseEntity<List<Instructor>> getInstructorById(@PathVariable("instructor-id") Long instructorId){
         return ResponseEntity.ok(instructorService.getInstructorById(instructorId));
     }
     @Operation(summary = "Delete Instructor By ID ")
