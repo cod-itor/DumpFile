@@ -20,3 +20,40 @@ INSERT INTO instructors (instructor_name, email) VALUES
                                                      ('Henry Wilson', 'h.wilson@it-training.org'),
                                                      ('Isabella Kwok', 'isabella.k@dev-mastery.com'),
                                                      ('Jameson Burke', 'j.burke@engineers.edu');
+INSERT INTO courses (course_name, description) VALUES
+                                                   ('Java Programming I', 'Introduction to Java syntax and OOP principles.'),
+                                                   ('Advanced Spring Boot', 'Building REST APIs and mastering Dependency Injection.'),
+                                                   ('Database Systems', 'Deep dive into PostgreSQL and relational modeling.'),
+                                                   ('Web Frontend Basics', 'Learning HTML, CSS, and basic JavaScript.'),
+                                                   ('React Development', 'Building dynamic user interfaces with React hooks.'),
+                                                   ('Data Structures', 'Focusing on arrays, stacks, and queues in Java.'),
+                                                   ('Software Engineering', 'Overview of the SDLC and agile methodologies.'),
+                                                   ('Computer Networks', 'Understanding TCP/IP, DNS, and HTTP protocols.'),
+                                                   ('Operating Systems', 'Learning about processes, threads, and memory.'),
+                                                   ('Cloud Computing', 'Introduction to AWS, Docker, and deployment.');
+INSERT INTO course_instructors (course_id, instructor_id) VALUES
+                                                   (1, 1),
+                                                   (2, 2),
+                                                   (3, 3),
+                                                   (4, 4),
+                                                   (5, 5),
+                                                   (6, 6),
+                                                   (7, 7),
+                                                   (8, 8),
+                                                   (9, 9),
+                                                   (10, 10);
+INSERT INTO student_courses (student_id, course_id) VALUES
+                                                   (1, 1),
+                                                   (1, 2),
+                                                   (2, 2),
+                                                   (2, 3),
+                                                   (3, 1),
+                                                   (3, 4),
+                                                   (4, 4),
+                                                   (5, 5),
+                                                   (5, 6),
+                                                   (6, 1),
+                                                   (7, 6),
+                                                   (8, 7),
+                                                   (9, 8),
+                                                   (10, 9);
