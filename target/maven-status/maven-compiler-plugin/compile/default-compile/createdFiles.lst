@@ -1,5 +1,6 @@
 com/HRD/DitaRector/PVH/Spring/service/StudentService.class
 com/HRD/DitaRector/PVH/Spring/controller/InstructorController.class
+com/HRD/DitaRector/PVH/Spring/model/Request/InstructorRequest.class
 com/HRD/DitaRector/PVH/Spring/model/Response/ApiResponse.class
 com/HRD/DitaRector/PVH/Spring/Application.class
 com/HRD/DitaRector/PVH/Spring/repository/InstructorRepository.class

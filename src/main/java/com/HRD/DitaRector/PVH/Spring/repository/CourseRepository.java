@@ -9,8 +9,8 @@ import java.util.List;
 public interface CourseRepository {
     @Results(id = "courseMapper", value = {
             @Result(property = "courseId" , column = "course_id"),
-            @Result(property = "courseName" , column = "course_name")
-            @Result(property = "")
+            @Result(property = "courseName" , column = "course_name"),
+            @Result(property = "instructionList " ,column = "course_id",one =  @One(select = "com.HRD.DitaRector.PVH.Spring.service.impl.InstructorServiceImpl.getInstructorById")),
     })
     @Select(
     "SELECT *  FROM courses OFFSET #{offset} LIMIT #{size}")

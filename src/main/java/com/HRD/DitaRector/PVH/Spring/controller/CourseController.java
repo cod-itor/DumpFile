@@ -13,19 +13,21 @@ import java.util.List;
 @RequestMapping("/api/v1/courses")
 public class CourseController {
     private final CourseService courseService;
-    public CourseController(CourseService courseService){
+
+    public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
+
     @Operation(summary = "Get All course")
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourse(@RequestParam Integer page , @RequestParam Integer size ){
-        return ResponseEntity.ok(courseService.getAllCourse(page , size));
+    public ResponseEntity<List<Course>> getAllCourse(@RequestParam Integer page, @RequestParam Integer size) {
+        return ResponseEntity.ok(courseService.getAllCourse(page, size));
 
     }
+
     @Operation(summary = "Get Instructor By ID")
     @GetMapping("/{course_id}")
-    public ResponseEntity<Course> getUserById(@PathVariable("course_id") Long courseId){
+    public ResponseEntity<Course> getUserById(@PathVariable("course_id") Long courseId) {
         return ResponseEntity.ok(courseService.getCourseById(courseId));
     }
-
 }
