@@ -12,6 +12,7 @@ com/HRD/DitaRector/PVH/Spring/controller/StudentController.class
 com/HRD/DitaRector/PVH/Spring/repository/StudentRepository.class
 com/HRD/DitaRector/PVH/Spring/service/impl/StudentServiceImpl.class
 com/HRD/DitaRector/PVH/Spring/model/Response/ApiResponse$ApiResponseBuilder.class
+com/HRD/DitaRector/PVH/Spring/model/Request/CourseRequest.class
 com/HRD/DitaRector/PVH/Spring/model/Entity/Student.class
 com/HRD/DitaRector/PVH/Spring/service/InstructorService.class
 com/HRD/DitaRector/PVH/Spring/service/CourseService.class

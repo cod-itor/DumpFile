@@ -5,6 +5,7 @@
 /Users/ditarector/Desktop/HRD ASSIGNMENT/SpringHomework/DumpFile/src/main/java/com/HRD/DitaRector/PVH/Spring/model/Entity/Course.java
 /Users/ditarector/Desktop/HRD ASSIGNMENT/SpringHomework/DumpFile/src/main/java/com/HRD/DitaRector/PVH/Spring/model/Entity/Instructor.java
 /Users/ditarector/Desktop/HRD ASSIGNMENT/SpringHomework/DumpFile/src/main/java/com/HRD/DitaRector/PVH/Spring/model/Entity/Student.java
+/Users/ditarector/Desktop/HRD ASSIGNMENT/SpringHomework/DumpFile/src/main/java/com/HRD/DitaRector/PVH/Spring/model/Request/CourseRequest.java
 /Users/ditarector/Desktop/HRD ASSIGNMENT/SpringHomework/DumpFile/src/main/java/com/HRD/DitaRector/PVH/Spring/model/Request/InstructorRequest.java
 /Users/ditarector/Desktop/HRD ASSIGNMENT/SpringHomework/DumpFile/src/main/java/com/HRD/DitaRector/PVH/Spring/model/Request/StudentsRequest.java
 /Users/ditarector/Desktop/HRD ASSIGNMENT/SpringHomework/DumpFile/src/main/java/com/HRD/DitaRector/PVH/Spring/model/Response/ApiResponse.java

@@ -17,5 +17,5 @@ public interface CourseRepository {
     List<Course> getAllCourse(Integer offset, Integer size);
 @ResultMap("courseMapper")
 @Select("SELECT * FROM courses WHERE course_id = #{courseId}")
-    Course getCourseByID(Long courseId);
+    List<Course> getCourseByID(Long courseId);
 }

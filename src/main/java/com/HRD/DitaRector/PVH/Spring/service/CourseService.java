@@ -11,5 +11,5 @@ public interface CourseService {
 
     List<Course> getAllCourse(Integer page , Integer size);
 
-    Course getCourseById(Long courseId);
+    List<Course> getCourseById(Long courseId);
 }

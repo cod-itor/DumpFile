@@ -10,7 +10,7 @@ import java.time.Instant;
 @NoArgsConstructor
 public class ApiResponse<T> {
     private boolean success;
-    private HttpStatus status;
+    private Integer status;
     private String messages;
     private T payload;
     private Instant timestamp;

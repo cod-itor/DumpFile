@@ -11,7 +11,8 @@ public interface StudentRepository {
 @Results(id = "studentMapper",  value={
         @Result(property = "studentId", column = "student_id"),
         @Result(property = "studentName", column = "student_name"),
-        @Result(property = "phoneNumber",column = "phone_number")
+        @Result(property = "phoneNumber",column = "phone_number"),
+
 //        @Result(property = "courseList" , column = )
 })
 
