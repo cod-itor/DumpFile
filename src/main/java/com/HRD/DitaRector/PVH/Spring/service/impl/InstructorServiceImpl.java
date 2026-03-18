@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
+
+//To Do List : Implement the Message like teacher make sure all of the method look great and acceptable
+//Some of them give weird Response PLease Check it
+
 @Service
 public class InstructorServiceImpl implements InstructorService {
     private final InstructorRepository instructorRepository;
-
     public InstructorServiceImpl(InstructorRepository instructorRepository){
         this.instructorRepository = instructorRepository;
     }
@@ -24,30 +27,83 @@ public class InstructorServiceImpl implements InstructorService {
         List<Instructor> instructors = instructorRepository.getAllInstructor(offset, size);
         return ApiResponse.<List<Instructor>>builder()
                 .success(true)
-                .status(200)
+                .status(HttpStatus.OK.value())
                 .messages("Instructor fetched successfully")
                 .payload(instructors)
                 .timestamp(Instant.now())
                 .build();
     }
     @Override
-    public Instructor getInstructorById(Long instructorId){
-        return instructorRepository.getInstructorById(instructorId);
+    public ApiResponse<List<Instructor>> getInstructorById(Long instructorId){
+        List<Instructor> instructors = instructorRepository.getInstructorById(instructorId);
+        if (instructors != null){
+            return ApiResponse.<List<Instructor>>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Instructor fetched successfully")
+                    .payload(instructors)
+                    .timestamp(Instant.now())
+                    .build();
+        }else {
+            return ApiResponse.<List<Instructor>>builder()
+                    .success(false)
+                    .status(HttpStatus.NOT_FOUND.value())
+                    .messages("No instructor found with the given ID")
+                    .timestamp(Instant.now())
+                    .build();
+        }
     }
 
     @Override
-    public void deleteUserById(Long instructorId) {
-         instructorRepository.deleteUserById(instructorId);
+    public ApiResponse<Void> deleteUserById(Long instructorId) {
+        instructorRepository.deleteUserById(instructorId);
+        return ApiResponse.<Void>builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .messages("Instructor deleted successfully")
+                .timestamp(Instant.now())
+                .build();
     }
 
     @Override
-    public List<Instructor> createInstructor(InstructorRequest instructorRequest) {
-        return instructorRepository.createInstructor(instructorRequest);
+    public ApiResponse<List<Instructor>> createInstructor(InstructorRequest instructorRequest) {
+        List<Instructor> instructors = instructorRepository.createInstructor(instructorRequest);
+        if (instructors != null && !instructors.isEmpty()){
+            return ApiResponse.<List<Instructor>>builder()
+                    .success(true)
+                    .status(HttpStatus.CREATED.value())
+                    .messages("Instructor created successfully")
+                    .payload(instructors)
+                    .timestamp(Instant.now())
+                    .build();
+        }
+        return ApiResponse.<List<Instructor>>builder()
+                .success(false)
+                .status(HttpStatus.BAD_REQUEST.value())
+                .messages("Unable to create instructor")
+                .timestamp(Instant.now())
+                .build();
     }
     @Override
-    public Instructor updateInstructor(Long instructorId, InstructorRequest instructorRequest){
-        return instructorRepository.updateInstructor(instructorId, instructorRequest);
-    }
+    public ApiResponse<Instructor> updateInstructor(Long instructorId, InstructorRequest instructorRequest){
+        Instructor instructor = instructorRepository.updateInstructor(instructorId, instructorRequest);
+        if (instructor != null){
+            return ApiResponse.<Instructor>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Instructor updated successfully")
+                    .payload(instructor)
+                    .timestamp(Instant.now())
+                    .build();
+        }else{
+            return ApiResponse.<Instructor>builder()
+                    .success(false)
+                    .status(HttpStatus.NOT_FOUND.value())
+                    .messages("Unable to find instructor for update")
+                    .timestamp(Instant.now())
+                    .build();
+        }
 
+    }
 
 }

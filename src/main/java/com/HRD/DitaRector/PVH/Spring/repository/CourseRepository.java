@@ -10,7 +10,7 @@ public interface CourseRepository {
     @Results(id = "courseMapper", value = {
             @Result(property = "courseId" , column = "course_id"),
             @Result(property = "courseName" , column = "course_name"),
-            @Result(property = "instructionList " ,column = "course_id",one =  @One(select = "com.HRD.DitaRector.PVH.Spring.service.impl.InstructorServiceImpl.getInstructorById")),
+            @Result(property = "instructionList " ,column = "instructor_id",one =  @One(select = "com.HRD.DitaRector.PVH.Spring.repository.InstructorRepository.getInstructorById")),
     })
     @Select(
     "SELECT *  FROM courses OFFSET #{offset} LIMIT #{size}")

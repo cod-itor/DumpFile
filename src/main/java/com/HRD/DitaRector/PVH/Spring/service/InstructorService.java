@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface InstructorService {
 
-ApiResponse<List<Instructor>> getAllInstructor(Integer page , Integer size);
-Instructor getInstructorById(Long instructorId);
+    ApiResponse<List<Instructor>> getAllInstructor(Integer page , Integer size);
+    ApiResponse<List<Instructor>> getInstructorById(Long instructorId);
 
-    void deleteUserById(Long instructorId);
+    ApiResponse<Void> deleteUserById(Long instructorId);
 
-    List<Instructor> createInstructor(InstructorRequest instructorRequest);
+    ApiResponse<List<Instructor>> createInstructor(InstructorRequest instructorRequest);
 
-    Instructor updateInstructor(Long instructorId, InstructorRequest instructorRequest);
+    ApiResponse<Instructor> updateInstructor(Long instructorId, InstructorRequest instructorRequest);
 }

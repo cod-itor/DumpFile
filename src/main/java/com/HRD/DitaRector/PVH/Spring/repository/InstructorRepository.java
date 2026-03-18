@@ -18,14 +18,16 @@ public interface InstructorRepository {
     List<Instructor> getAllInstructor(Integer offset , Integer size);
 @ResultMap("instructorMapper")
     @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
-    Instructor getInstructorById(Long instructorId);
+    List<Instructor> getInstructorById(Long instructorId);
 
 
     @Delete("DELETE FROM instructors WHERE instructor_id = #{instructorId}")
     void deleteUserById(Long instructorId);
+    @ResultMap("instructorMapper")
 @Select("INSERT INTO instructors VALUES (default,#{req.instructorName}, #{req.email} ) RETURNING *")
     List<Instructor> createInstructor(@Param("req") InstructorRequest instructorRequest);
-@Select("UPDATE instructors SET instructor_name = #{req.instructorName} , email = #{req.email} WHERE instructor_id = #{instructorId} ;")
+    @ResultMap("instructorMapper")
+@Select("UPDATE instructors SET instructor_name = #{req.instructorName} , email = #{req.email} WHERE instructor_id = #{instructorId} RETURNING *;")
     Instructor updateInstructor( Long instructorId,@Param("req") InstructorRequest instructorRequest);
 }
 

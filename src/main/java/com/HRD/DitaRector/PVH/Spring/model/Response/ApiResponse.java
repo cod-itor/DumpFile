@@ -1,13 +1,14 @@
 package com.HRD.DitaRector.PVH.Spring.model.Response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.springframework.http.HttpStatus;
 
 import java.time.Instant;
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse<T> {
     private boolean success;
     private Integer status;
