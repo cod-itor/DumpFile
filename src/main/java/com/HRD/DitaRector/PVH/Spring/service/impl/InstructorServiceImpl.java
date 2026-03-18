@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.util.List;
 
 //To Do List : Implement the Message like teacher make sure all of the method look great and acceptable
-
+//Some of them give weird Response PLease Check it
 
 @Service
 public class InstructorServiceImpl implements InstructorService {
@@ -49,7 +49,6 @@ public class InstructorServiceImpl implements InstructorService {
                     .success(false)
                     .status(HttpStatus.NOT_FOUND.value())
                     .messages("No instructor found with the given ID")
-                    .payload(null)
                     .timestamp(Instant.now())
                     .build();
         }
@@ -96,13 +95,15 @@ public class InstructorServiceImpl implements InstructorService {
                     .payload(instructor)
                     .timestamp(Instant.now())
                     .build();
+        }else{
+            return ApiResponse.<Instructor>builder()
+                    .success(false)
+                    .status(HttpStatus.NOT_FOUND.value())
+                    .messages("Unable to find instructor for update")
+                    .timestamp(Instant.now())
+                    .build();
         }
-        return ApiResponse.<Instructor>builder()
-                .success(false)
-                .status(HttpStatus.NOT_FOUND.value())
-                .messages("Unable to find instructor for update")
-                .timestamp(Instant.now())
-                .build();
+
     }
 
 }
