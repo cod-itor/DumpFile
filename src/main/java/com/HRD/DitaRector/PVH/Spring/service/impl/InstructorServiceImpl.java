@@ -31,8 +31,25 @@ public class InstructorServiceImpl implements InstructorService {
                 .build();
     }
     @Override
-    public Instructor getInstructorById(Long instructorId){
-        return instructorRepository.getInstructorById(instructorId);
+    public ApiResponse<List<Instructor>> getInstructorById(Long instructorId){
+        List<Instructor> instructors = instructorRepository.getInstructorById(instructorId);
+        if (instructors != null){
+            return ApiResponse.<List<Instructor>>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Instructor fetched successfully")
+                    .payload(instructors)
+                    .timestamp(Instant.now())
+                    .build();
+        }else {
+            return ApiResponse.<List<Instructor>>builder()
+                    .success(false)
+                    .status(HttpStatus.NOT_FOUND.value())
+                    .messages("No instructor found with the given ID")
+                    .payload(null)
+                    .timestamp(Instant.now())
+                    .build();
+        }
     }
 
     @Override
@@ -46,6 +63,7 @@ public class InstructorServiceImpl implements InstructorService {
     }
     @Override
     public Instructor updateInstructor(Long instructorId, InstructorRequest instructorRequest){
+
         return instructorRepository.updateInstructor(instructorId, instructorRequest);
     }
 

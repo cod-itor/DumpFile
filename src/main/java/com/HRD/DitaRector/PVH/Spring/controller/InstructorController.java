@@ -32,9 +32,10 @@ public class InstructorController {
     }
     @Operation(summary = "Get instructor by ID")
     @GetMapping("{instructor-id}")
-    public ResponseEntity<Instructor> getInstructorById(@PathVariable("instructor-id") Long instructorId){
+    public ResponseEntity<ApiResponse<List<Instructor>>> getInstructorById(@PathVariable("instructor-id") Long instructorId){
+        ApiResponse<List<Instructor>> response = instructorService.getInstructorById(instructorId);
 
-        return ResponseEntity.ok(instructorService.getInstructorById(instructorId));
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
     @Operation(summary = "Delete Instructor By ID ")
     @DeleteMapping("{instructor-id}")
@@ -48,12 +49,12 @@ public class InstructorController {
 
         return ResponseEntity.ok(instructorService.createInstructor(instructorRequest));
         }
-    @Operation(summary = "Update Instructor By ID ")
-    @PutMapping("{instructor-id}")
-    public ResponseEntity<Instructor> updateInstructor(@PathVariable("instructor-id") Long instructorId , @RequestBody InstructorRequest instructorRequest ){
-
-        return ResponseEntity.ok(instructorService.updateInstructor(instructorId ,instructorRequest));
-    }
+//    @Operation(summary = "Update Instructor By ID ")
+//    @PutMapping("{instructor-id}")
+//    public ResponseEntity<ApiResponse<List<Instructor>>> updateInstructor(@PathVariable("instructor-id") Long instructorId , @RequestBody InstructorRequest instructorRequest ){
+//        ApiResponse<List<Instructor>> response = instructorService.updateInstructor(instructorId, instructorRequest);
+//        return ResponseEntity.ok(instructorService.updateInstructor(instructorId ,instructorRequest));
+//    }
 
 
 }

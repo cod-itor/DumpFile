@@ -10,7 +10,7 @@ import java.util.List;
 public interface InstructorService {
 
 ApiResponse<List<Instructor>> getAllInstructor(Integer page , Integer size);
-Instructor getInstructorById(Long instructorId);
+ApiResponse<List<Instructor>> getInstructorById(Long instructorId);
 
     void deleteUserById(Long instructorId);
 

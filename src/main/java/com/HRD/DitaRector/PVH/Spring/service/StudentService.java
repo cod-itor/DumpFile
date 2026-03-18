@@ -12,5 +12,5 @@ public interface StudentService {
     ApiResponse<List<Student>> getAllStudent(Integer page, Integer size);
     ApiResponse<Student> getStudentById(Long studentId);
 
-    Student createStudent(StudentsRequest studentsRequest);
+    ApiResponse<List<Student>> createStudent(StudentsRequest studentsRequest);
 }

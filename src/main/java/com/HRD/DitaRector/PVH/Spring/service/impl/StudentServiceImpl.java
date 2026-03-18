@@ -6,11 +6,9 @@ import com.HRD.DitaRector.PVH.Spring.model.Response.ApiResponse;
 import com.HRD.DitaRector.PVH.Spring.repository.StudentRepository;
 import com.HRD.DitaRector.PVH.Spring.service.StudentService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.time.OffsetDateTime;
 import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -33,19 +31,19 @@ public class StudentServiceImpl implements StudentService {
     }
     @Override
     public ApiResponse<Student> getStudentById(Long studentId){
-       Student students = studentRepository.getStudentById(studentId);
+        Student students = studentRepository.getStudentById(studentId);
         if(students != null){
            return  ApiResponse.<Student>builder()
                     .success(true)
-                    .status(200)
+                    .status(HttpStatus.OK.value())
                     .messages("Students fetched successfully")
                     .payload(students)
                     .timestamp(Instant.now())
                     .build();
         }else{
             return ApiResponse.<Student>builder()
-                    .success(true)
-                    .status(200)
+                    .success(false)
+                    .status(HttpStatus.NOT_FOUND.value())
                     .messages("No students found with the given ID")
                     .payload(null)
                     .timestamp(Instant.now())
@@ -54,8 +52,24 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student createStudent(StudentsRequest studentsRequest) {
-
-        return studentRepository.createStudent(studentsRequest);
+    public ApiResponse<List<Student>> createStudent(StudentsRequest studentsRequest) {
+        List<Student> students = studentRepository.createStudent(studentsRequest);
+        if(students != null){
+            return  ApiResponse.<List<Student>>builder()
+                    .success(true)
+                    .status(HttpStatus.CREATED.value())
+                    .messages("Students fetched successfully")
+                    .payload(students)
+                    .timestamp(Instant.now())
+                    .build();
+        }else{
+            return ApiResponse.<List<Student>>builder()
+                    .success(false)
+                    .status(HttpStatus.BAD_REQUEST.value())
+                    .messages("No students found with the given ID")
+                    .payload(null)
+                    .timestamp(Instant.now())
+                    .build();
+        }
     }
 }

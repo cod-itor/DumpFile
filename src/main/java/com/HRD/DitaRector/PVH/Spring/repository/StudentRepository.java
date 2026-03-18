@@ -28,5 +28,5 @@ INSERT INTO students VALUES (default,#{req.studentName}, #{req.email}
 , #{req.phoneNumber}, #{req.courseId}) RETURNING* ;
 
 """)
-    Student createStudent(@Param("req")StudentsRequest studentsRequest);
+    List<Student> createStudent(@Param("req")StudentsRequest studentsRequest);
 }
