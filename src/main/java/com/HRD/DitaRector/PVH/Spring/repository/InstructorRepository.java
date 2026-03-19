@@ -11,14 +11,20 @@ public interface InstructorRepository {
 
     @Results(id = "instructorMapper" , value = {
             @Result(property = "instructorId" , column = "instructor_id"),
-            @Result(property = "instructorName" , column = "instructor_name")
+            @Result(property = "instructorName" , column = "instructor_name"),
+            @Result(property = "email" , column = "email")
     })
 
     @Select("SELECT * FROM instructors OFFSET #{offset} LIMIT #{size}")
     List<Instructor> getAllInstructor(Integer offset , Integer size);
-@ResultMap("instructorMapper")
+    
+    @ResultMap("instructorMapper")
     @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
     List<Instructor> getInstructorById(Long instructorId);
+
+    @ResultMap("instructorMapper")
+    @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
+    Instructor getInstructorByIdSingle(Long instructorId);
 
 
     @Delete("DELETE FROM instructors WHERE instructor_id = #{instructorId}")
