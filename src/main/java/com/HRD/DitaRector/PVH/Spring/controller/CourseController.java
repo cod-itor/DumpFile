@@ -47,4 +47,12 @@ public class CourseController {
         return ResponseEntity.status(response.getStatus()).body(response);
 
     }
+
+    @Operation(summary = "Update course By Id")
+    @PutMapping("{course-id}")
+    public ResponseEntity<ApiResponse<List<Course>>> updateCourseById(@PathVariable("course-id") Long courseId, @RequestBody CourseRequest courseRequest){
+        ApiResponse<List<Course>> response = courseService.updateCourseById(courseId, courseRequest);
+        return ResponseEntity.status(response.getStatus()).body(response);
+
+    }
 }

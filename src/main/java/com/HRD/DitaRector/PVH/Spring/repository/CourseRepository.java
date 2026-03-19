@@ -4,6 +4,7 @@ import com.HRD.DitaRector.PVH.Spring.model.Entity.Course;
 import com.HRD.DitaRector.PVH.Spring.model.Request.CourseRequest;
 import org.apache.catalina.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -31,9 +32,11 @@ public interface CourseRepository {
 @Select("INSERT INTO courses VALUES (default,#{req.courseName},#{req.description} ,#{req.instructorId}) RETURNING *" )
     List<Course> createCourse(@Param("req") CourseRequest courseRequest);
 
-
+    @ResultMap("courseMapper")
     @Delete("DELETE FROM courses WHERE course_id = #{courseId}")
     int deleteCourseById(Long courseId);
-
+    @ResultMap("courseMapper")
+    @Update("UPDATE courses SET course_name = #{req.courseName} , description = #{req.description} , instructor_id = #{req.instructorId} ")
+    List<Course> updateCourseById( Long courseId , @Param("req")CourseRequest courseRequest);
 }
 

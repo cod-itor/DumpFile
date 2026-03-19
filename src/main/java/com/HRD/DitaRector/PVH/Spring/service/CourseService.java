@@ -17,4 +17,6 @@ public interface CourseService {
     ApiResponse<List<Course>> createCourse(CourseRequest courseRequest);
 
     ApiResponse<Void> deleteCourseById(Long courseId);
+
+    ApiResponse<List<Course>> updateCourseById(Long courseId, CourseRequest courseRequest);
 }

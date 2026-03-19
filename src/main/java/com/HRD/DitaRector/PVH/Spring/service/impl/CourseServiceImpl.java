@@ -71,5 +71,25 @@ public class CourseServiceImpl implements CourseService {
                 .build();
     }
 
+    @Override
+    public ApiResponse<List<Course>> updateCourseById(Long courseId, CourseRequest courseRequest) {
+        List<Course> response = courseRepository.updateCourseById(courseId, courseRequest);
+        if(response != null){
+            return ApiResponse.<List<Course>>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Course updated successfully")
+                    .payload(response)
+                    .timestamp(Instant.now())
+                    .build();
+        }
+        return ApiResponse.<List<Course>>builder()
+                .success(false)
+                .status(HttpStatus.NOT_FOUND.value())
+                .messages("No courses found with the given ID")
+                .timestamp(Instant.now())
+                .build();
+    }
+
 
 }
