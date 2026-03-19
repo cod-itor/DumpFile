@@ -30,4 +30,10 @@ INSERT INTO students VALUES (default,#{req.studentName}, #{req.email}
 
 """)
     List<Student> createStudent(@Param("req")StudentsRequest studentsRequest);
+@ResultMap("studentMapper")
+@Delete("DELETE FROM student_course WHERE student_id = #{id}")
+int deleteStudentRelated(Long studentId);
+
+    @Delete("DELETE FROM students WHERE student_id = #{id}")
+    int deleteStudentById(Long studentId);
 }

@@ -72,4 +72,26 @@ public class StudentServiceImpl implements StudentService {
                     .build();
         }
     }
+    @Override
+    public ApiResponse<Void> deleteStudentById(Long studentId){
+        int junctionRowDeleted = studentRepository.deleteStudentRelated(studentId);
+        int rowDeleted = studentRepository.deleteStudentById(studentId);
+        if(rowDeleted > 0 &  junctionRowDeleted > 0 ){
+            return ApiResponse.<Void>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Student deleted successfully")
+                    .timestamp(Instant.now())
+                    .build();
+        }
+            return ApiResponse.<Void>builder()
+                    .success(false)
+                    .status(HttpStatus.NOT_FOUND.value())
+                    .messages("No students found with the given ID")
+                    .timestamp(Instant.now())
+                    .build();
+
+        }
+
 }
+

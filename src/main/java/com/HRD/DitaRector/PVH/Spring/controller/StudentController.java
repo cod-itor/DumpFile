@@ -6,6 +6,8 @@ import com.HRD.DitaRector.PVH.Spring.model.Response.ApiResponse;
 import com.HRD.DitaRector.PVH.Spring.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
 
+import org.apache.coyote.Response;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +44,12 @@ public class StudentController {
 
 
     }
-
+    @Operation(summary = "Delete student by ID")
+    @DeleteMapping("{student-id}")
+    public ResponseEntity<ApiResponse<Void>> deleteStudentById(@PathVariable("student-id") Long studentId){
+        ApiResponse<Void> response = studentService.deleteStudentById(studentId);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
 
 
 

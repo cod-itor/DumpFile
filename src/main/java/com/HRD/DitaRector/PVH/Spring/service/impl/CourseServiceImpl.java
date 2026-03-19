@@ -66,7 +66,7 @@ public class CourseServiceImpl implements CourseService {
         return ApiResponse.<Void>builder()
                 .success(false)
                 .status(HttpStatus.NOT_FOUND.value())
-                .messages("Course not found or already deleted")
+                .messages("No courses found with the given ID")
                 .timestamp(Instant.now())
                 .build();
     }

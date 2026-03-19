@@ -13,4 +13,6 @@ public interface StudentService {
     ApiResponse<Student> getStudentById(Long studentId);
 
     ApiResponse<List<Student>> createStudent(StudentsRequest studentsRequest);
+
+    ApiResponse<Void> deleteStudentById(Long studentId);
 }
