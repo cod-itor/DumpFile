@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentsRequest {
-    private Long studentId;
     private String studentName;
     private String email;
     private String phoneNumber;

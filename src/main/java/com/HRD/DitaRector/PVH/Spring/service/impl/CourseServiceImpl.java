@@ -35,19 +35,21 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public ApiResponse<List<Course>> createCourse(CourseRequest courseRequest) {
         List<Course> course = courseRepository.createCourse(courseRequest);
-        if (course != null && !course.isEmpty()){
+
+        if (course == null || course.isEmpty()) {
             return ApiResponse.<List<Course>>builder()
-                    .success(true)
-                    .status(HttpStatus.CREATED.value())
-                    .messages("Course created successfully")
-                    .payload(course)
+                    .success(false)
+                    .status(HttpStatus.BAD_REQUEST.value())
+                    .messages("Unable to create Course")
                     .timestamp(Instant.now())
                     .build();
         }
+
         return ApiResponse.<List<Course>>builder()
-                .success(false)
-                .status(HttpStatus.BAD_REQUEST.value())
-                .messages("Unable to create Course")
+                .success(true)
+                .status(HttpStatus.CREATED.value())
+                .messages("Course created successfully")
+                .payload(course)
                 .timestamp(Instant.now())
                 .build();
     }
