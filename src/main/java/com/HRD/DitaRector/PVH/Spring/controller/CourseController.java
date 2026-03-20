@@ -24,7 +24,7 @@ public class CourseController {
 
     @Operation(summary = "Get All course")
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourse(@RequestParam @DefaultValue("10") Integer page, @RequestParam @DefaultValue("10") Integer size) {
+    public ResponseEntity<List<Course>> getAllCourse(@RequestParam (defaultValue = "1") Integer page, @RequestParam (defaultValue = "10") Integer size) {
         return ResponseEntity.ok(courseService.getAllCourse(page, size));
 
     }

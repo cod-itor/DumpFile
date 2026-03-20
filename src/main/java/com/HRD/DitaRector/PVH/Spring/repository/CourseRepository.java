@@ -34,9 +34,16 @@ public interface CourseRepository {
 
     @ResultMap("courseMapper")
     @Delete("DELETE FROM courses WHERE course_id = #{courseId}")
-    int deleteCourseById(Long courseId);
+    Long deleteCourseById(Long courseId);
     @ResultMap("courseMapper")
-    @Update("UPDATE courses SET course_name = #{req.courseName} , description = #{req.description} , instructor_id = #{req.instructorId} ")
+    @Select("""
+        UPDATE courses 
+        SET course_name = #{req.courseName}, 
+            description = #{req.description}, 
+            instructor_id = #{req.instructorId} 
+        WHERE course_id = #{courseId} 
+        RETURNING *
+    """)
     List<Course> updateCourseById( Long courseId , @Param("req")CourseRequest courseRequest);
 }
 

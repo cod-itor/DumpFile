@@ -54,7 +54,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ApiResponse<Void> deleteCourseById(Long courseId) {
-        int rowsDeleted = courseRepository.deleteCourseById(courseId);
+        Long rowsDeleted = courseRepository.deleteCourseById(courseId);
         if (rowsDeleted > 0) {
             return ApiResponse.<Void>builder()
                     .success(true)
@@ -73,8 +73,10 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ApiResponse<List<Course>> updateCourseById(Long courseId, CourseRequest courseRequest) {
+
         List<Course> response = courseRepository.updateCourseById(courseId, courseRequest);
-        if(response != null){
+
+        if(!response.isEmpty()){
             return ApiResponse.<List<Course>>builder()
                     .success(true)
                     .status(HttpStatus.OK.value())
@@ -83,6 +85,7 @@ public class CourseServiceImpl implements CourseService {
                     .timestamp(Instant.now())
                     .build();
         }
+
         return ApiResponse.<List<Course>>builder()
                 .success(false)
                 .status(HttpStatus.NOT_FOUND.value())
