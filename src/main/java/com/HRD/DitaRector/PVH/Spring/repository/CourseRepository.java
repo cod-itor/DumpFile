@@ -22,12 +22,12 @@ public interface CourseRepository {
 @Select("SELECT * FROM courses WHERE course_id = #{courseId}")
     List<Course> getCourseById(Long courseId);
 
-
-
-
     @ResultMap("courseMapper")
     @Select("SELECT * FROM courses WHERE course_id IN (SELECT course_id FROM student_course WHERE student_id = #{studentId})")
     List<Course> getCoursesByStudentId(Long studentId);
+
+    @Select("SELECT COUNT(*) > 0 FROM courses WHERE course_id = #{courseId}")
+    boolean courseExists(Long courseId);
 @ResultMap("courseMapper")
 @Select("INSERT INTO courses VALUES (default,#{req.courseName},#{req.description} ,#{req.instructorId}) RETURNING *" )
     List<Course> createCourse(@Param("req") CourseRequest courseRequest);

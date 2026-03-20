@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import com.HRD.DitaRector.PVH.Spring.model.Entity.Course;
+
 
 @Getter
 @Setter
@@ -16,6 +18,6 @@ public class Student {
     private String studentName;
     private String email;
     private String phoneNumber;
-    private List<Integer> courseList;
+    private List<Course> courseList;
 
 }

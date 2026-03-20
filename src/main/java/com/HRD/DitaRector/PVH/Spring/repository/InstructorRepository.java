@@ -27,7 +27,7 @@ public interface InstructorRepository {
     Instructor getInstructorByIdSingle(Long instructorId);
 
 
-    @Delete("DELETE FROM instructorgs WHERE instructor_id = #{instructorId}")
+    @Delete("DELETE FROM instructors WHERE instructor_id = #{instructorId}")
     void deleteUserById(Long instructorId);
     @ResultMap("instructorMapper")
 @Select("INSERT INTO instructors VALUES (default,#{req.instructorName}, #{req.email} ) RETURNING *")
