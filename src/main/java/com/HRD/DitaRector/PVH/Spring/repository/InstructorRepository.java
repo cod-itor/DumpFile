@@ -20,18 +20,21 @@ public interface InstructorRepository {
     
     @ResultMap("instructorMapper")
     @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
-    List<Instructor> getInstructorById(Long instructorId);
+    Instructor getInstructorById(Long instructorId);
 
     @ResultMap("instructorMapper")
     @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
     Instructor getInstructorByIdSingle(Long instructorId);
 
+    @Select("SELECT COUNT(*) > 0 FROM instructors WHERE instructor_id = #{instructorId}")
+    boolean instructorExists(Long instructorId);
+
 
     @Delete("DELETE FROM instructors WHERE instructor_id = #{instructorId}")
-    void deleteUserById(Long instructorId);
+    Long deleteUserById(Long instructorId);
     @ResultMap("instructorMapper")
 @Select("INSERT INTO instructors VALUES (default,#{req.instructorName}, #{req.email} ) RETURNING *")
-    List<Instructor> createInstructor(@Param("req") InstructorRequest instructorRequest);
+    Instructor createInstructor(@Param("req") InstructorRequest instructorRequest);
     @ResultMap("instructorMapper")
 @Select("UPDATE instructors SET instructor_name = #{req.instructorName} , email = #{req.email} WHERE instructor_id = #{instructorId} RETURNING *;")
     Instructor updateInstructor( Long instructorId,@Param("req") InstructorRequest instructorRequest);

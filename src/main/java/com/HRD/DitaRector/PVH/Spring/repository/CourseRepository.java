@@ -20,7 +20,7 @@ public interface CourseRepository {
     List<Course> getAllCourse(Integer offset, Integer size);
 @ResultMap("courseMapper")
 @Select("SELECT * FROM courses WHERE course_id = #{courseId}")
-    List<Course> getCourseById(Long courseId);
+    Course getCourseById(Long courseId);
 
     @ResultMap("courseMapper")
     @Select("SELECT * FROM courses WHERE course_id IN (SELECT course_id FROM student_course WHERE student_id = #{studentId})")

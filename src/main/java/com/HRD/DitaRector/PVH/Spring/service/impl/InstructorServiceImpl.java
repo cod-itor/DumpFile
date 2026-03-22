@@ -34,42 +34,53 @@ public class InstructorServiceImpl implements InstructorService {
                 .build();
     }
     @Override
-    public ApiResponse<List<Instructor>> getInstructorById(Long instructorId){
-        List<Instructor> instructors = instructorRepository.getInstructorById(instructorId);
+    public ApiResponse<Instructor> getInstructorById(Long instructorId){
+        Instructor instructors = instructorRepository.getInstructorById(instructorId);
         if (instructors != null){
-            return ApiResponse.<List<Instructor>>builder()
+            return ApiResponse.<Instructor>builder()
                     .success(true)
                     .status(HttpStatus.OK.value())
                     .messages("Instructor fetched successfully")
                     .payload(instructors)
                     .timestamp(Instant.now())
                     .build();
-        }else {
-            return ApiResponse.<List<Instructor>>builder()
-                    .success(false)
-                    .status(HttpStatus.NOT_FOUND.value())
-                    .messages("No instructor found with the given ID")
-                    .timestamp(Instant.now())
-                    .build();
+
         }
+        return ApiResponse.<Instructor>builder()
+                .success(false)
+                .status(HttpStatus.NOT_FOUND.value())
+                .messages("No instructor found with the given ID")
+                .timestamp(Instant.now())
+                .build();
+
+
     }
 
     @Override
     public ApiResponse<Void> deleteUserById(Long instructorId) {
-        instructorRepository.deleteUserById(instructorId);
+        Long rowsDeleted = instructorRepository.deleteUserById(instructorId);
+        if (rowsDeleted > 0) {
+            return ApiResponse.<Void>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Instructor deleted successfully")
+                    .timestamp(Instant.now())
+                    .build();
+        }
         return ApiResponse.<Void>builder()
-                .success(true)
-                .status(HttpStatus.OK.value())
-                .messages("Instructor deleted successfully")
+                .success(false)
+                .status(HttpStatus.NOT_FOUND.value())
+                .messages("No instructors found with the given ID")
                 .timestamp(Instant.now())
                 .build();
+
     }
 
     @Override
-    public ApiResponse<List<Instructor>> createInstructor(InstructorRequest instructorRequest) {
-        List<Instructor> instructors = instructorRepository.createInstructor(instructorRequest);
-        if (instructors != null && !instructors.isEmpty()){
-            return ApiResponse.<List<Instructor>>builder()
+    public ApiResponse<Instructor> createInstructor(InstructorRequest instructorRequest) {
+        Instructor instructors = instructorRepository.createInstructor(instructorRequest);
+        if (instructors != null){
+            return ApiResponse.<Instructor>builder()
                     .success(true)
                     .status(HttpStatus.CREATED.value())
                     .messages("Instructor created successfully")
@@ -77,7 +88,7 @@ public class InstructorServiceImpl implements InstructorService {
                     .timestamp(Instant.now())
                     .build();
         }
-        return ApiResponse.<List<Instructor>>builder()
+        return ApiResponse.<Instructor>builder()
                 .success(false)
                 .status(HttpStatus.BAD_REQUEST.value())
                 .messages("Unable to create instructor")

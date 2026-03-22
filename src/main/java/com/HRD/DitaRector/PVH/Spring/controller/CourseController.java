@@ -24,23 +24,27 @@ public class CourseController {
 
     @Operation(summary = "Get All course")
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourse(@RequestParam (defaultValue = "1") Integer page, @RequestParam (defaultValue = "10") Integer size) {
-        return ResponseEntity.ok(courseService.getAllCourse(page, size));
+    public ResponseEntity<ApiResponse<List<Course>>> getAllCourse(@RequestParam (defaultValue = "1") Integer page, @RequestParam (defaultValue = "10") Integer size) {
+        ApiResponse<List<Course>> response = courseService.getAllCourse(page , size);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
 
     }
 
-    @Operation(summary = "Get Instructor By ID")
+    @Operation(summary = "Get course By ID")
     @GetMapping("/{course_id}")
-    public ResponseEntity<List<Course>> getUserById(@PathVariable("course_id") Long courseId) {
-        return ResponseEntity.ok(courseService.getCourseById(courseId));
+    public ResponseEntity<ApiResponse<Course>> getUserById(@PathVariable("course_id") Long courseId) {
+        ApiResponse<Course> response = courseService.getCourseById(courseId);
+
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
-    @Operation(summary = "Post Instructor By Id")
+    @Operation(summary = "Create course By Id")
     @PostMapping
     public ResponseEntity<ApiResponse<List<Course>>> createCourse(@RequestBody CourseRequest courseRequest){
         return ResponseEntity.ok(courseService.createCourse(courseRequest));
 
     }
-    @Operation(summary = "Delete Course By Id")
+    @Operation(summary = "Delete course By Id")
     @DeleteMapping("{course-id}")
     public ResponseEntity<ApiResponse<Void>> deleteCourseById(@PathVariable("course-id") Long courseId){
         ApiResponse<Void> response = courseService.deleteCourseById(courseId);

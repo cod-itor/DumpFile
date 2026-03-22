@@ -10,9 +10,9 @@ import java.util.List;
 public interface CourseService {
 
 
-    List<Course> getAllCourse(Integer page , Integer size);
+    ApiResponse<List<Course>> getAllCourse(Integer page , Integer size);
 
-    List<Course> getCourseById(Long courseId);
+    ApiResponse<Course> getCourseById(Long courseId);
 
     ApiResponse<List<Course>> createCourse(CourseRequest courseRequest);
 

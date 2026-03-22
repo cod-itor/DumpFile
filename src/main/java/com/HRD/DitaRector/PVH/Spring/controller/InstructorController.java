@@ -21,15 +21,15 @@ public class InstructorController {
 
     @Operation(summary = "Get All instructors")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Instructor>>> getAllInstructor(@RequestParam Integer page , @RequestParam Integer size ){
+    public ResponseEntity<ApiResponse<List<Instructor>>> getAllInstructor(@RequestParam (defaultValue = "1")Integer page , @RequestParam (defaultValue = "10") Integer size ){
         ApiResponse<List<Instructor>> response = instructorService.getAllInstructor(page, size);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
     @Operation(summary = "Get instructor by ID")
     @GetMapping("{instructor-id}")
-    public ResponseEntity<ApiResponse<List<Instructor>>> getInstructorById(@PathVariable("instructor-id") Long instructorId){
-        ApiResponse<List<Instructor>> response = instructorService.getInstructorById(instructorId);
+    public ResponseEntity<ApiResponse<Instructor>> getInstructorById(@PathVariable("instructor-id") Long instructorId){
+        ApiResponse<Instructor> response = instructorService.getInstructorById(instructorId);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
@@ -42,8 +42,8 @@ public class InstructorController {
 
     @Operation(summary = "Create Instructor By ID ")
     @PostMapping
-    public ResponseEntity<ApiResponse<List<Instructor>>> createInstructor(@RequestBody InstructorRequest instructorRequest) {
-        ApiResponse<List<Instructor>> response = instructorService.createInstructor(instructorRequest);
+    public ResponseEntity<ApiResponse<Instructor>> createInstructor(@RequestBody InstructorRequest instructorRequest) {
+        ApiResponse<Instructor> response = instructorService.createInstructor(instructorRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
