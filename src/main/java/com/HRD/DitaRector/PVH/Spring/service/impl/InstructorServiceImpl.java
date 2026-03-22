@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
 
-//To Do List : Implement the Message like teacher make sure all of the method look great and acceptable
-//Some of them give weird Response PLease Check it
-
 @Service
 public class InstructorServiceImpl implements InstructorService {
     private final InstructorRepository instructorRepository;
