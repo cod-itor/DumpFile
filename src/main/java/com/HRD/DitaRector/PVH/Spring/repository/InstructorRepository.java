@@ -20,7 +20,7 @@ public interface InstructorRepository {
     
     @ResultMap("instructorMapper")
     @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
-    List<Instructor> getInstructorById(Long instructorId);
+    Instructor getInstructorById(Long instructorId);
 
     @ResultMap("instructorMapper")
     @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
