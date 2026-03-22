@@ -19,15 +19,15 @@ public class CourseServiceImpl implements CourseService {
     private final InstructorRepository instructorRepository;
 
 
-    public CourseServiceImpl(CourseRepository courseRepository, InstructorRepository instructorRepository){
+    public CourseServiceImpl(CourseRepository courseRepository, InstructorRepository instructorRepository) {
         this.courseRepository = courseRepository;
         this.instructorRepository = instructorRepository;
     }
 
     @Override
-    public ApiResponse<List<Course>> getAllCourse(@RequestParam (defaultValue = "1") Integer page , @RequestParam (defaultValue = "10") Integer size){
-        Integer offset = size *(page -1 );
-        List<Course> response = courseRepository.getAllCourse(offset , size);
+    public ApiResponse<List<Course>> getAllCourse(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
+        Integer offset = size * (page - 1);
+        List<Course> response = courseRepository.getAllCourse(offset, size);
         return ApiResponse.<List<Course>>builder()
                 .success(true)
                 .status(HttpStatus.OK.value())
@@ -39,8 +39,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ApiResponse<Course> getCourseById(Long courseId) {
-       Course course = courseRepository.getCourseById(courseId);
-        if (course != null){
+        Course course = courseRepository.getCourseById(courseId);
+        if (course != null) {
             return ApiResponse.<Course>builder()
                     .success(true)
                     .status(HttpStatus.OK.value())
@@ -60,33 +60,33 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ApiResponse<List<Course>> createCourse(CourseRequest courseRequest) {
-    Long instructorId = courseRequest.getInstructorId();
-    if (instructorId == null || !instructorRepository.instructorExists(instructorId)) {
-        return ApiResponse.<List<Course>>builder()
-            .success(false)
-            .status(HttpStatus.BAD_REQUEST.value())
-            .messages("Invalid instructorId: " + instructorId)
-            .timestamp(Instant.now())
-            .build();
-    }
+        Long instructorId = courseRequest.getInstructorId();
+        if (instructorId == null || !instructorRepository.instructorExists(instructorId)) {
+            return ApiResponse.<List<Course>>builder()
+                    .success(false)
+                    .status(HttpStatus.BAD_REQUEST.value())
+                    .messages("Invalid instructorId: " + instructorId)
+                    .timestamp(Instant.now())
+                    .build();
+        }
 
-    List<Course> course = courseRepository.createCourse(courseRequest);
-    if (course == null || course.isEmpty()) {
-        return ApiResponse.<List<Course>>builder()
-            .success(false)
-            .status(HttpStatus.BAD_REQUEST.value())
-            .messages("Unable to create Course")
-            .timestamp(Instant.now())
-            .build();
-    }
+        List<Course> course = courseRepository.createCourse(courseRequest);
+        if (course == null || course.isEmpty()) {
+            return ApiResponse.<List<Course>>builder()
+                    .success(false)
+                    .status(HttpStatus.BAD_REQUEST.value())
+                    .messages("Unable to create Course")
+                    .timestamp(Instant.now())
+                    .build();
+        }
 
-    return ApiResponse.<List<Course>>builder()
-        .success(true)
-        .status(HttpStatus.CREATED.value())
-        .messages("Course created successfully")
-        .payload(course)
-        .timestamp(Instant.now())
-        .build();
+        return ApiResponse.<List<Course>>builder()
+                .success(true)
+                .status(HttpStatus.CREATED.value())
+                .messages("Course created successfully")
+                .payload(course)
+                .timestamp(Instant.now())
+                .build();
     }
 
     @Override
@@ -110,35 +110,33 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public ApiResponse<List<Course>> updateCourseById(Long courseId, CourseRequest courseRequest) {
-    Long instructorId = courseRequest.getInstructorId();
-    if (instructorId == null || !instructorRepository.instructorExists(instructorId)) {
+        Long instructorId = courseRequest.getInstructorId();
+        if (instructorId == null || !instructorRepository.instructorExists(instructorId)) {
+            return ApiResponse.<List<Course>>builder()
+                    .success(false)
+                    .status(HttpStatus.BAD_REQUEST.value())
+                    .messages("No instructor found with the given ID  " )
+                    .timestamp(Instant.now())
+                    .build();
+        }
+
+        List<Course> response = courseRepository.updateCourseById(courseId, courseRequest);
+        if (response == null || response.isEmpty()) {
+            return ApiResponse.<List<Course>>builder()
+                    .success(false)
+                    .status(HttpStatus.NOT_FOUND.value())
+                    .messages("No courses found with the given ID")
+                    .timestamp(Instant.now())
+                    .build();
+        }
         return ApiResponse.<List<Course>>builder()
-            .success(false)
-            .status(HttpStatus.BAD_REQUEST.value())
-            .messages("Invalid instructorId: " + instructorId)
-            .timestamp(Instant.now())
-            .build();
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .messages("Course updated successfully")
+                .payload(response)
+                .timestamp(Instant.now())
+                .build();
+
+
     }
-
-    List<Course> response = courseRepository.updateCourseById(courseId, courseRequest);
-
-    if (response != null && !response.isEmpty()) {
-        return ApiResponse.<List<Course>>builder()
-            .success(true)
-            .status(HttpStatus.OK.value())
-            .messages("Course updated successfully")
-            .payload(response)
-            .timestamp(Instant.now())
-            .build();
-    }
-
-    return ApiResponse.<List<Course>>builder()
-        .success(false)
-        .status(HttpStatus.NOT_FOUND.value())
-        .messages("No courses found with the given ID")
-        .timestamp(Instant.now())
-        .build();
-    }
-
-
 }
