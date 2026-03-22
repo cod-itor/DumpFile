@@ -31,7 +31,7 @@ public interface InstructorRepository {
     Long deleteUserById(Long instructorId);
     @ResultMap("instructorMapper")
 @Select("INSERT INTO instructors VALUES (default,#{req.instructorName}, #{req.email} ) RETURNING *")
-    List<Instructor> createInstructor(@Param("req") InstructorRequest instructorRequest);
+    Instructor createInstructor(@Param("req") InstructorRequest instructorRequest);
     @ResultMap("instructorMapper")
 @Select("UPDATE instructors SET instructor_name = #{req.instructorName} , email = #{req.email} WHERE instructor_id = #{instructorId} RETURNING *;")
     Instructor updateInstructor( Long instructorId,@Param("req") InstructorRequest instructorRequest);

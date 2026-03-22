@@ -42,8 +42,8 @@ public class InstructorController {
 
     @Operation(summary = "Create Instructor By ID ")
     @PostMapping
-    public ResponseEntity<ApiResponse<List<Instructor>>> createInstructor(@RequestBody InstructorRequest instructorRequest) {
-        ApiResponse<List<Instructor>> response = instructorService.createInstructor(instructorRequest);
+    public ResponseEntity<ApiResponse<Instructor>> createInstructor(@RequestBody InstructorRequest instructorRequest) {
+        ApiResponse<Instructor> response = instructorService.createInstructor(instructorRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 

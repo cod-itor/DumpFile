@@ -13,7 +13,7 @@ public interface InstructorService {
     ApiResponse<Instructor> getInstructorById(Long instructorId);
     ApiResponse<Void> deleteUserById(Long instructorId);
 
-    ApiResponse<List<Instructor>> createInstructor(InstructorRequest instructorRequest);
+    ApiResponse<Instructor> createInstructor(InstructorRequest instructorRequest);
 
     ApiResponse<Instructor> updateInstructor(Long instructorId, InstructorRequest instructorRequest);
 }

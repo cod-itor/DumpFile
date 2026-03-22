@@ -8,6 +8,7 @@ import com.HRD.DitaRector.PVH.Spring.repository.CourseRepository;
 import com.HRD.DitaRector.PVH.Spring.service.CourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.Instant;
 import java.util.List;
@@ -22,14 +23,37 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getAllCourse(Integer page , Integer size){
+    public ApiResponse<List<Course>> getAllCourse(@RequestParam (defaultValue = "1") Integer page , @RequestParam (defaultValue = "10") Integer size){
         Integer offset = size *(page -1 );
-        return courseRepository.getAllCourse(offset , size);
+        List<Course> response = courseRepository.getAllCourse(offset , size);
+        return ApiResponse.<List<Course>>builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .messages("Instructor fetched successfully")
+                .payload(response)
+                .timestamp(Instant.now())
+                .build();
     }
 
     @Override
-    public List<Course> getCourseById(Long courseId) {
-        return courseRepository.getCourseById(courseId);
+    public ApiResponse<Course> getCourseById(Long courseId) {
+       Course course = courseRepository.getCourseById(courseId);
+        if (course != null){
+            return ApiResponse.<Course>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Instructor fetched successfully")
+                    .payload(course)
+                    .timestamp(Instant.now())
+                    .build();
+
+        }
+        return ApiResponse.<Course>builder()
+                .success(false)
+                .status(HttpStatus.NOT_FOUND.value())
+                .messages("No instructor found with the given ID")
+                .timestamp(Instant.now())
+                .build();
     }
 
     @Override

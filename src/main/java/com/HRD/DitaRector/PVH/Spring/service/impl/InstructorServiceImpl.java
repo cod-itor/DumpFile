@@ -76,11 +76,11 @@ public class InstructorServiceImpl implements InstructorService {
 
     }
 
-    @Overrideit
-    public ApiResponse<List<Instructor>> createInstructor(InstructorRequest instructorRequest) {
-        List<Instructor> instructors = instructorRepository.createInstructor(instructorRequest);
-        if (instructors != null && !instructors.isEmpty()){
-            return ApiResponse.<List<Instructor>>builder()
+    @Override
+    public ApiResponse<Instructor> createInstructor(InstructorRequest instructorRequest) {
+        Instructor instructors = instructorRepository.createInstructor(instructorRequest);
+        if (instructors != null){
+            return ApiResponse.<Instructor>builder()
                     .success(true)
                     .status(HttpStatus.CREATED.value())
                     .messages("Instructor created successfully")
@@ -88,7 +88,7 @@ public class InstructorServiceImpl implements InstructorService {
                     .timestamp(Instant.now())
                     .build();
         }
-        return ApiResponse.<List<Instructor>>builder()
+        return ApiResponse.<Instructor>builder()
                 .success(false)
                 .status(HttpStatus.BAD_REQUEST.value())
                 .messages("Unable to create instructor")
