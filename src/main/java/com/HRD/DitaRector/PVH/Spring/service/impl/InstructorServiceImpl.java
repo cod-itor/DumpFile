@@ -27,7 +27,7 @@ public class InstructorServiceImpl implements InstructorService {
         List<Instructor> instructors = instructorRepository.getAllInstructor(offset, size);
         return ApiResponse.<List<Instructor>>builder()
                 .success(true)
-                .status(HttpStatus.OK.value())
+                .status(HttpStatus.NOT_FOUND.value())
                 .messages("Instructor fetched successfully")
                 .payload(instructors)
                 .timestamp(Instant.now())
