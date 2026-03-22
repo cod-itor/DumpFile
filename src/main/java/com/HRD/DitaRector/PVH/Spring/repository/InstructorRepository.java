@@ -26,6 +26,9 @@ public interface InstructorRepository {
     @Select("SELECT * FROM instructors WHERE instructor_id = #{instructorId}")
     Instructor getInstructorByIdSingle(Long instructorId);
 
+    @Select("SELECT COUNT(*) > 0 FROM instructors WHERE instructor_id = #{instructorId}")
+    boolean instructorExists(Long instructorId);
+
 
     @Delete("DELETE FROM instructors WHERE instructor_id = #{instructorId}")
     Long deleteUserById(Long instructorId);
