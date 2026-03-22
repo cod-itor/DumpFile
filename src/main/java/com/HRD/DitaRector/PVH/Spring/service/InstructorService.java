@@ -11,7 +11,6 @@ public interface InstructorService {
 
     ApiResponse<List<Instructor>> getAllInstructor(Integer page , Integer size);
     ApiResponse<Instructor> getInstructorById(Long instructorId);
-
     ApiResponse<Void> deleteUserById(Long instructorId);
 
     ApiResponse<List<Instructor>> createInstructor(InstructorRequest instructorRequest);

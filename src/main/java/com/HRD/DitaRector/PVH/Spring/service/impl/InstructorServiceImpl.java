@@ -58,16 +58,25 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     public ApiResponse<Void> deleteUserById(Long instructorId) {
-        instructorRepository.deleteUserById(instructorId);
+        Long rowsDeleted = instructorRepository.deleteUserById(instructorId);
+        if (rowsDeleted > 0) {
+            return ApiResponse.<Void>builder()
+                    .success(true)
+                    .status(HttpStatus.OK.value())
+                    .messages("Instructor deleted successfully")
+                    .timestamp(Instant.now())
+                    .build();
+        }
         return ApiResponse.<Void>builder()
-                .success(true)
-                .status(HttpStatus.OK.value())
-                .messages("Instructor deleted successfully")
+                .success(false)
+                .status(HttpStatus.NOT_FOUND.value())
+                .messages("No instructors found with the given ID")
                 .timestamp(Instant.now())
                 .build();
+
     }
 
-    @Override
+    @Overrideit
     public ApiResponse<List<Instructor>> createInstructor(InstructorRequest instructorRequest) {
         List<Instructor> instructors = instructorRepository.createInstructor(instructorRequest);
         if (instructors != null && !instructors.isEmpty()){
